@@ -19,31 +19,18 @@
         </th>
       </tr>
     </thead>
-    <tbody>
-<tr  v-for="(book, index) in books">
-  <td>
-    {{index + 1}}
-  </td>
-  <td>
-    {{book.name}}
-  </td>
-  <td>
-    {{book.phone}}
-  </td>
-  <td>
-    {{book.email}}
-  </td>
-  <td>
-    <input type="submit" class="btn btn-primary" value="Delete" v-on:click="remove(book)">
-  </td>
-</tr>
-  </tbody>
+    <each-phone-book :books="books" :remove="remove"></each-phone-book>
   </table>
 </template>
 
 <script>
+
+import EachPhoneBook from '../components/EachPhoneBook'
 export default {
-  props: ['books', 'remove']
+  props: ['books', 'remove'],
+  components: {
+    EachPhoneBook
+  }
 }
 </script>
 
