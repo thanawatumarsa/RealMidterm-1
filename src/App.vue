@@ -3,63 +3,16 @@
     <div class="page-header">
       <h1>phoneBook</h1>
     </div>
-        <table class="table table">
-          <thead>
-            <tr>
-              <th>
-                #
-              </th>
-              <th>
-                ชื่อ
-              </th>
-              <th>
-                เบอร์โทร
-              </th>
-              <th>
-                Email
-              </th>
-              <th>
-                Delete
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-      <tr  v-for="(book, index) in books">
-        <td>
-          {{index + 1}}
-        </td>
-        <td>
-          {{book.name}}
-        </td>
-        <td>
-          {{book.phone}}
-        </td>
-        <td>
-          {{book.email}}
-        </td>
-        <td>
-          <input type="submit" class="btn btn-primary" value="Delete" v-on:click="removePhoneBook(book)">
-        </td>
-      </tr>
-        </tbody>
-        </table>
-        <form id="form" class="form-inline" v-on:submit.prevent="addPhoneBook">
-          <div class="form-group">
-            <input type="text" id="name" class="form-control" placeholder="ชื่อ" v-model="newPhoneBook.name">
-          </div>
-          <div class="form-group">
-            <input type="text" id="phone" class="form-control" placeholder="เบอร์โทร" v-model="newPhoneBook.phone">
-          </div>
-          <div class="form-group">
-            <input type="text" id="email" class="form-control" placeholder="Email" v-model="newPhoneBook.email">
-          </div>
-          <input type="submit" class="btn btn-default" value="+ Add">
-      </form>
+    <phone-book-lists :books = "books" :remove = "removePhoneBook"></phone-book-lists>
+    <add-from :addphonebook = "addPhoneBook" :newphonebook = "newPhoneBook"></add-from>
   </div>
 </template>
 <script>
 
 import Firebase from 'firebase'
+
+import PhoneBookLists from './components/PhoneBookLists'
+import AddFrom from './components/AddFrom'
 
 let config = {
   apiKey: 'AIzaSyBlVjSOp6Nn0fIa6-ibSJUm1DNjGjN4w4g',
@@ -87,6 +40,10 @@ export default {
         email: ''
       }
     }
+  },
+  components: {
+    PhoneBookLists,
+    AddFrom
   },
   methods: {
     addPhoneBook: function () {
